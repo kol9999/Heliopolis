@@ -31,10 +31,7 @@ class OtpValidation(APIView):
         # try:
         otp_object = Otp.objects.get(email = email)
         if otp_object.otp == otp:
-            try:
-                user = Student.objects.get(email = email)
-            except:
-                user = Instructor.objects.get(email = email)
+            user = CustomUser.objects.get(email = email)
             token = Token.objects.get_or_create(user = user)[0]
             if token:
                 user.is_active = True
@@ -70,7 +67,6 @@ class Login(APIView):
             }
             return Response(data)
         return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)
-
 
 
         # try:
