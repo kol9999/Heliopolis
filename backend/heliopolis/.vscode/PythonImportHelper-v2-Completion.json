@@ -1,10 +1,242 @@
 [
     {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "StudentCreateSerializer",
+        "importPath": "api.students.serializers",
+        "description": "api.students.serializers",
+        "isExtraImport": true,
+        "detail": "api.students.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "StudentCreateSerializer",
+        "importPath": "api.students.serializers",
+        "description": "api.students.serializers",
+        "isExtraImport": true,
+        "detail": "api.students.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "Otp",
+        "importPath": "apps.otp.models",
+        "description": "apps.otp.models",
+        "isExtraImport": true,
+        "detail": "apps.otp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Otp",
+        "importPath": "apps.otp.models",
+        "description": "apps.otp.models",
+        "isExtraImport": true,
+        "detail": "apps.otp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Otp",
+        "importPath": "apps.otp.models",
+        "description": "apps.otp.models",
+        "isExtraImport": true,
+        "detail": "apps.otp.models",
+        "documentation": {}
+    },
+    {
+        "label": "Otp",
+        "importPath": "apps.otp.models",
+        "description": "apps.otp.models",
+        "isExtraImport": true,
+        "detail": "apps.otp.models",
+        "documentation": {}
+    },
+    {
         "label": "django.db",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "django.db",
         "description": "django.db",
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "transaction",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "transaction",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
         "detail": "django.db",
         "documentation": {}
     },
@@ -145,147 +377,11 @@
         "documentation": {}
     },
     {
-        "label": "serializers",
-        "importPath": "rest_framework",
-        "description": "rest_framework",
+        "label": "Token",
+        "importPath": "rest_framework.authtoken.models",
+        "description": "rest_framework.authtoken.models",
         "isExtraImport": true,
-        "detail": "rest_framework",
-        "documentation": {}
-    },
-    {
-        "label": "status",
-        "importPath": "rest_framework",
-        "description": "rest_framework",
-        "isExtraImport": true,
-        "detail": "rest_framework",
-        "documentation": {}
-    },
-    {
-        "label": "Student",
-        "importPath": "apps.student.models",
-        "description": "apps.student.models",
-        "isExtraImport": true,
-        "detail": "apps.student.models",
-        "documentation": {}
-    },
-    {
-        "label": "Student",
-        "importPath": "apps.student.models",
-        "description": "apps.student.models",
-        "isExtraImport": true,
-        "detail": "apps.student.models",
-        "documentation": {}
-    },
-    {
-        "label": "Student",
-        "importPath": "apps.student.models",
-        "description": "apps.student.models",
-        "isExtraImport": true,
-        "detail": "apps.student.models",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
-        "isExtraImport": true,
-        "detail": "django.shortcuts",
-        "documentation": {}
-    },
-    {
-        "label": "JsonResponse",
-        "importPath": "django.http",
-        "description": "django.http",
-        "isExtraImport": true,
-        "detail": "django.http",
-        "documentation": {}
-    },
-    {
-        "label": "APIView",
-        "importPath": "rest_framework.views",
-        "description": "rest_framework.views",
-        "isExtraImport": true,
-        "detail": "rest_framework.views",
-        "documentation": {}
-    },
-    {
-        "label": "Response",
-        "importPath": "rest_framework.response",
-        "description": "rest_framework.response",
-        "isExtraImport": true,
-        "detail": "rest_framework.response",
-        "documentation": {}
-    },
-    {
-        "label": "StudentCreateSerializer",
-        "importPath": "api.students.serializers",
-        "description": "api.students.serializers",
-        "isExtraImport": true,
-        "detail": "api.students.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "Otp",
-        "importPath": "apps.otp.models",
-        "description": "apps.otp.models",
-        "isExtraImport": true,
-        "detail": "apps.otp.models",
-        "documentation": {}
-    },
-    {
-        "label": "Otp",
-        "importPath": "apps.otp.models",
-        "description": "apps.otp.models",
-        "isExtraImport": true,
-        "detail": "apps.otp.models",
+        "detail": "rest_framework.authtoken.models",
         "documentation": {}
     },
     {
@@ -294,6 +390,142 @@
         "description": "rest_framework.authtoken.models",
         "isExtraImport": true,
         "detail": "rest_framework.authtoken.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "importPath": "apps.student.models",
+        "description": "apps.student.models",
+        "isExtraImport": true,
+        "detail": "apps.student.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "importPath": "apps.student.models",
+        "description": "apps.student.models",
+        "isExtraImport": true,
+        "detail": "apps.student.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "importPath": "apps.student.models",
+        "description": "apps.student.models",
+        "isExtraImport": true,
+        "detail": "apps.student.models",
+        "documentation": {}
+    },
+    {
+        "label": "Student",
+        "importPath": "apps.student.models",
+        "description": "apps.student.models",
+        "isExtraImport": true,
+        "detail": "apps.student.models",
+        "documentation": {}
+    },
+    {
+        "label": "Instructor",
+        "importPath": "apps.instructor.models",
+        "description": "apps.instructor.models",
+        "isExtraImport": true,
+        "detail": "apps.instructor.models",
+        "documentation": {}
+    },
+    {
+        "label": "Instructor",
+        "importPath": "apps.instructor.models",
+        "description": "apps.instructor.models",
+        "isExtraImport": true,
+        "detail": "apps.instructor.models",
+        "documentation": {}
+    },
+    {
+        "label": "Instructor",
+        "importPath": "apps.instructor.models",
+        "description": "apps.instructor.models",
+        "isExtraImport": true,
+        "detail": "apps.instructor.models",
+        "documentation": {}
+    },
+    {
+        "label": "Instructor",
+        "importPath": "apps.instructor.models",
+        "description": "apps.instructor.models",
+        "isExtraImport": true,
+        "detail": "apps.instructor.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "TimeStampAndVisibility",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "TimeStampAndVisibility",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "TimeStampAndVisibility",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
+        "label": "InstructorCreateSerializer",
+        "importPath": "api.instructor.serializers",
+        "description": "api.instructor.serializers",
+        "isExtraImport": true,
+        "detail": "api.instructor.serializers",
         "documentation": {}
     },
     {
@@ -321,14 +553,6 @@
         "documentation": {}
     },
     {
-        "label": "OtpValidation",
-        "importPath": "api.students.views",
-        "description": "api.students.views",
-        "isExtraImport": true,
-        "detail": "api.students.views",
-        "documentation": {}
-    },
-    {
         "label": "RegisterStudent",
         "importPath": "api.students.views",
         "description": "api.students.views",
@@ -342,6 +566,30 @@
         "description": "api.students.views",
         "isExtraImport": true,
         "detail": "api.students.views",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterInstructor",
+        "importPath": "api.instructor.views",
+        "description": "api.instructor.views",
+        "isExtraImport": true,
+        "detail": "api.instructor.views",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "isExtraImport": true,
+        "detail": "api.common.views",
+        "documentation": {}
+    },
+    {
+        "label": "OtpValidation",
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "isExtraImport": true,
+        "detail": "api.common.views",
         "documentation": {}
     },
     {
@@ -606,62 +854,6 @@
         "documentation": {}
     },
     {
-        "label": "CustomUser",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "TimeStampAndVisibility",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "CustomUser",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "TimeStampAndVisibility",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "CustomUser",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "TimeStampAndVisibility",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
-        "label": "CustomUser",
-        "importPath": "apps.common.models",
-        "description": "apps.common.models",
-        "isExtraImport": true,
-        "detail": "apps.common.models",
-        "documentation": {}
-    },
-    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -704,6 +896,42 @@
         "documentation": {}
     },
     {
+        "label": "OtpValidation",
+        "kind": 6,
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "peekOfCode": "class OtpValidation(APIView):\n    def post(self, request):\n        data = request.data\n        try:\n            email = request.data['email']\n        except:\n            return Response({'message': 'email needed'}, status=status.HTTP_400_BAD_REQUEST,)\n        try:\n            otp = request.data['otp']\n        except:",
+        "detail": "api.common.views",
+        "documentation": {}
+    },
+    {
+        "label": "Login",
+        "kind": 6,
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "peekOfCode": "class Login(APIView):\n    def post(self, request):\n        data = request.data\n        try:\n            email = request.data['email']\n        except:\n            return Response({'message': 'email needed'}, status=status.HTTP_400_BAD_REQUEST,)\n        try:\n            password = request.data['password']\n        except:",
+        "detail": "api.common.views",
+        "documentation": {}
+    },
+    {
+        "label": "InstructorCreateSerializer",
+        "kind": 6,
+        "importPath": "api.instructor.serializers",
+        "description": "api.instructor.serializers",
+        "peekOfCode": "class InstructorCreateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Instructor\n        fields = (\n            'email', 'password'\n        )\n    def create(self, validated_data):\n        user = super().create(validated_data)\n        user.set_password(validated_data['password'])\n        user.save()",
+        "detail": "api.instructor.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterInstructor",
+        "kind": 6,
+        "importPath": "api.instructor.views",
+        "description": "api.instructor.views",
+        "peekOfCode": "class RegisterInstructor(APIView):\n    def post(self, request):\n        data = request.data\n        serializer = InstructorCreateSerializer(data = data)\n        if serializer.is_valid():\n            with transaction.atomic():\n                serializer.save()\n                email = serializer.validated_data['email']\n                otp = Otp.create_otp(email)\n                return Response({'message': \"Successfully register, please validate token\"}, status=status.HTTP_201_CREATED)",
+        "detail": "api.instructor.views",
+        "documentation": {}
+    },
+    {
         "label": "StudentCreateSerializer",
         "kind": 6,
         "importPath": "api.students.serializers",
@@ -731,20 +959,11 @@
         "documentation": {}
     },
     {
-        "label": "OtpValidation",
-        "kind": 6,
-        "importPath": "api.students.views",
-        "description": "api.students.views",
-        "peekOfCode": "class OtpValidation(APIView):\n    def post(self, request):\n        data = request.data\n        try:\n            email = request.data['email']\n        except:\n            return Response({'message': 'email needed'}, status=status.HTTP_400_BAD_REQUEST,)\n        try:\n            otp = request.data['otp']\n        except:",
-        "detail": "api.students.views",
-        "documentation": {}
-    },
-    {
         "label": "urlpatterns",
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    path('token-validation/', OtpValidation.as_view(), name='token-validation')\n]",
+        "peekOfCode": "urlpatterns = [\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    #student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    #instructor registration\n    path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),\n    #token validation\n    path('token-validation/', OtpValidation.as_view(), name='token-validation'),\n    #login\n    path('login/', Login.as_view(), name = 'login')",
         "detail": "api.urls",
         "documentation": {}
     },

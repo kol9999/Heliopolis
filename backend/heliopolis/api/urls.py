@@ -15,11 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from api.students.views import OtpValidation, RegisterStudent, TestAPIView
+from api.students.views import  RegisterStudent, TestAPIView
+from api.instructor.views import RegisterInstructor
+from api.common.views import Login, OtpValidation
 
 
 urlpatterns = [
     path('test/', TestAPIView.as_view(), name='test_api_view'),
+    #student registration
     path('register-student/', RegisterStudent.as_view(), name='register_student'),
-    path('token-validation/', OtpValidation.as_view(), name='token-validation')
+    #instructor registration
+    path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),
+    #token validation
+    path('token-validation/', OtpValidation.as_view(), name='token-validation'),
+    #login
+    path('login/', Login.as_view(), name = 'login')
 ]
