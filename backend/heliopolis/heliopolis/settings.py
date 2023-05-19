@@ -37,6 +37,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    #3rd party apps
+    'rest_framework.authtoken',
+
+    #apps
+    "apps.course",
+    "apps.instructor",
+    "apps.student",
+    "apps.quiz",
+    "apps.common",
+    "apps.otp"
+
+
 ]
 
 MIDDLEWARE = [
@@ -50,6 +63,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "heliopolis.urls"
+
+AUTH_USER_MODEL = 'common.CustomUser'
+
 
 TEMPLATES = [
     {
@@ -121,3 +137,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
