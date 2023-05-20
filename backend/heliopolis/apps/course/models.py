@@ -21,6 +21,7 @@ class Course(TimeStampAndVisibility):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')
 
     def save(self, *args, **kwargs):

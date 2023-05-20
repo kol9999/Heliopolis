@@ -361,6 +361,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -1351,6 +1367,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0004_course_description",
+        "description": "apps.course.migrations.0004_course_description",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"course\", \"0003_alter_chapter_slug_alter_course_slug_and_more\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"course\",\n            name=\"description\",\n            field=models.TextField(blank=True, null=True),\n        ),",
+        "detail": "apps.course.migrations.0004_course_description",
+        "documentation": {}
+    },
+    {
         "label": "CourseConfig",
         "kind": 6,
         "importPath": "apps.course.apps",
@@ -1373,7 +1398,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    owner = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)\nclass Chapter(TimeStampAndVisibility):",
+        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    description = models.TextField(null=True, blank=True)\n    owner = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1634,7 +1659,7 @@
         "kind": 5,
         "importPath": "heliopolis.settings",
         "description": "heliopolis.settings",
-        "peekOfCode": "DEFAULT_AUTHENTICATION_CLASSES = (\n    'rest_framework.authentication.TokenAuthentication',\n)\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100",
+        "peekOfCode": "DEFAULT_AUTHENTICATION_CLASSES = (\n    'rest_framework.authentication.TokenAuthentication',\n)\nREST_FRAMEWORK = {\n    # 'DEFAULT_PERMISSION_CLASSES': [\n    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    # ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100",
         "detail": "heliopolis.settings",
         "documentation": {}
     },
@@ -1643,7 +1668,7 @@
         "kind": 5,
         "importPath": "heliopolis.settings",
         "description": "heliopolis.settings",
-        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100\n}\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/",
+        "peekOfCode": "REST_FRAMEWORK = {\n    # 'DEFAULT_PERMISSION_CLASSES': [\n    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    # ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100\n}\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/",
         "detail": "heliopolis.settings",
         "documentation": {}
     },

@@ -61,9 +61,12 @@ class Login(APIView):
             return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)
         if user.check_password(password):
             token = Token.objects.get_or_create(user = user)[0]
+            user_group = user.get_user_group()
             data = {
                 'message': 'Successfully logged in',
-                'token': str(token)
+                'token': str(token),
+                'group': str(user_group[0]) if user_group else None,
+                'email': user.email
             }
             return Response(data)
         return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)

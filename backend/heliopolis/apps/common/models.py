@@ -26,3 +26,6 @@ class CustomUser(AbstractUser):
         if not self.username:
             self.username = self.email
         super().save(*args, **kwargs)
+
+    def get_user_group(self, *args, **kwargs):
+        return self.groups.all()

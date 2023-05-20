@@ -14,6 +14,7 @@ const show_msg = ref(false);
 const otp = ref()
 
 const email_error = ref('')
+const wrong_credential_error = ref('')
 
 
 const router = useRouter();
@@ -84,6 +85,32 @@ async function submit_otp(){
     })
 }
 
+
+async function signin(){
+  loading.value = true
+  const data = {
+    'email':email.value,
+    'password':password.value
+  }
+  await axios.post('http://127.0.0.1:8000/api/v1/login/', data)
+  .then(res => {
+    console.log(res)
+    localStorage.setItem('token', `Token ${res.data.token}`);
+    loading.value = false
+    if(res.data.group === 'instructor'){
+      router.push({path:'/instructor'})
+    }
+    else{
+      router.push({path:'/student'})
+    }
+  })
+  .catch(err => {
+    wrong_credential_error.value = err.response.data.message
+    loading.value = false
+    console.log(err)
+  })
+}
+
 // // lifecycle hooks
 // onMounted(() => {
 //   console.log(`The initial count is ${count.value}.`)
@@ -96,11 +123,13 @@ async function submit_otp(){
       class="my-28 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8"
     >
       <div>
-        <form class="space-y-6" action="#">
+        <form class="space-y-6" @submit.prevent="signin">
           <h1 class="text-center text-3xl font-semibold">Heliopolis</h1>
           <h5 class="text-xl font-medium text-gray-900 text-center">
             Sign in to our platform
           </h5>
+          <p v-if="wrong_credential_error" class="text-sm text-red-600 text-center">{{ wrong_credential_error }}</p>
+
           <div>
             <label
               for="email"
@@ -108,6 +137,7 @@ async function submit_otp(){
               >Your email</label
             >
             <input
+            v-model="email"
               type="email"
               name="email"
               id="email"
@@ -123,6 +153,7 @@ async function submit_otp(){
               >Your password</label
             >
             <input
+            v-model="password"
               type="password"
               name="password"
               id="password"
@@ -139,7 +170,6 @@ async function submit_otp(){
                   type="checkbox"
                   value=""
                   class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
-                  required
                 />
               </div>
               <label
@@ -153,10 +183,19 @@ async function submit_otp(){
             >
           </div>
           <button
+          v-if="!loading"
             type="submit"
             class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             Login to your account
+          </button>
+          <button
+            v-if="loading"
+            type="submit"
+            class="w-full text-white bg-blue-300 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center animate-pulse"
+            disabled
+          >
+            loading...
           </button>
           <div class="text-sm font-medium text-gray-500">
             Not registered?
