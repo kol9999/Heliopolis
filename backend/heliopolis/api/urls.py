@@ -14,20 +14,30 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
-from api.students.views import  RegisterStudent, TestAPIView
+from django.urls import path, include
+from api.students.views import RegisterStudent, TestAPIView
 from api.instructor.views import RegisterInstructor
 from api.common.views import Login, OtpValidation
+from rest_framework import routers
+from api.course.views import ChapterViewSet, CourseViewSet, LessonViewSet
+
+
+router = routers.DefaultRouter()
+
+router.register('course', CourseViewSet, basename="course"),
+router.register('chapter', ChapterViewSet, basename="chapter"),
+router.register('lesson', LessonViewSet, basename="lesson"),
 
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('test/', TestAPIView.as_view(), name='test_api_view'),
-    #student registration
+    # student registration
     path('register-student/', RegisterStudent.as_view(), name='register_student'),
-    #instructor registration
+    # instructor registration
     path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),
-    #token validation
+    # token validation
     path('token-validation/', OtpValidation.as_view(), name='token-validation'),
-    #login
-    path('login/', Login.as_view(), name = 'login')
+    # login
+    path('login/', Login.as_view(), name='login')
 ]
