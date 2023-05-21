@@ -8,6 +8,14 @@
         "documentation": {}
     },
     {
+        "label": "get_object_or_404",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -80,6 +88,23 @@
         "documentation": {}
     },
     {
+        "label": "rest_framework.views",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
         "label": "APIView",
         "importPath": "rest_framework.views",
         "description": "rest_framework.views",
@@ -101,6 +126,14 @@
         "description": "rest_framework.views",
         "isExtraImport": true,
         "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
         "documentation": {}
     },
     {
@@ -145,6 +178,14 @@
     },
     {
         "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
         "importPath": "rest_framework",
         "description": "rest_framework",
         "isExtraImport": true,
@@ -377,6 +418,30 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -550,6 +615,14 @@
         "description": "apps.instructor.models",
         "isExtraImport": true,
         "detail": "apps.instructor.models",
+        "documentation": {}
+    },
+    {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
         "documentation": {}
     },
     {
@@ -825,6 +898,14 @@
         "documentation": {}
     },
     {
+        "label": "CourseDetails",
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "isExtraImport": true,
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
         "label": "CourseViewSet",
         "importPath": "api.course.views",
         "description": "api.course.views",
@@ -838,6 +919,14 @@
         "description": "api.course.views",
         "isExtraImport": true,
         "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
         "documentation": {}
     },
     {
@@ -1209,7 +1298,7 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner')\n    def perform_update(self, serializer):\n        # Retrieve the current user",
+        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner')",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1218,7 +1307,7 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class ChapterViewSet(viewsets.ModelViewSet):\n    serializer_class = ChapterSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def get_queryset(self):\n        user = self.request.user\n        return Chapter.objects.filter(course__owner=user).select_related('course')\n    def perform_update(self, serializer):\n        # Retrieve the current user",
+        "peekOfCode": "class ChapterViewSet(viewsets.ModelViewSet):\n    serializer_class = ChapterSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def get_queryset(self):\n        user = self.request.user\n        return Chapter.objects.filter(course__owner=user).select_related('course')\n    def perform_update(self, serializer):\n        # Retrieve the current user",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1227,7 +1316,16 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class LessonViewSet(viewsets.ModelViewSet):\n    serializer_class = LessonSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def get_queryset(self):\n        user = self.request.user\n        return Lesson.objects.filter(chapter__course__owner=user).select_related('chapter')\n    def perform_update(self, serializer):\n        # Retrieve the current user",
+        "peekOfCode": "class LessonViewSet(viewsets.ModelViewSet):\n    serializer_class = LessonSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def get_queryset(self):\n        user = self.request.user\n        return Lesson.objects.filter(chapter__course__owner=user).select_related('chapter')\n    def perform_update(self, serializer):\n        # Retrieve the current user",
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "CourseDetails",
+        "kind": 6,
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "peekOfCode": "class CourseDetails(APIView):\n    def get(self, request):\n        course_id = request.query_params.get('course_id')\n        if course_id:\n            course_obj = get_object_or_404(Course, id=course_id)\n            data = {\n                'title' : course_obj.title,\n                'description' : course_obj.description,\n                'chapters' : []\n            }",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1281,7 +1379,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\"),\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\"),\nrouter.register('lesson', LessonViewSet, basename=\"lesson\"),\nurlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    # instructor registration",
+        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\"),\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\"),\nrouter.register('lesson', LessonViewSet, basename=\"lesson\"),\nurlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # course details\n    path('course_details/', CourseDetails.as_view(), name=\"course details\"),\n    # student registration",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -1290,7 +1388,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    # instructor registration\n    path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),\n    # token validation\n    path('token-validation/', OtpValidation.as_view(), name='token-validation'),\n    # login",
+        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # course details\n    path('course_details/', CourseDetails.as_view(), name=\"course details\"),\n    # student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    # instructor registration\n    path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),\n    # token validation",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -1376,6 +1474,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0005_alter_course_owner_alter_course_title",
+        "description": "apps.course.migrations.0005_alter_course_owner_alter_course_title",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"course\", \"0004_course_description\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"course\",\n            name=\"owner\",\n            field=models.ForeignKey(",
+        "detail": "apps.course.migrations.0005_alter_course_owner_alter_course_title",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0006_remove_chapter_slug_remove_lesson_slug",
+        "description": "apps.course.migrations.0006_remove_chapter_slug_remove_lesson_slug",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"course\", \"0005_alter_course_owner_alter_course_title\"),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name=\"chapter\",\n            name=\"slug\",\n        ),\n        migrations.RemoveField(",
+        "detail": "apps.course.migrations.0006_remove_chapter_slug_remove_lesson_slug",
+        "documentation": {}
+    },
+    {
         "label": "CourseConfig",
         "kind": 6,
         "importPath": "apps.course.apps",
@@ -1389,7 +1505,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Category(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)\nclass Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)",
+        "peekOfCode": "class Category(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)\nclass Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255, unique=True)\n    slug = models.SlugField(unique=True, null=True, blank=True)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1398,7 +1514,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    description = models.TextField(null=True, blank=True)\n    owner = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)",
+        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255, unique=True)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    description = models.TextField(null=True, blank=True)\n    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1407,7 +1523,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Chapter(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, blank=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)\nclass Lesson(TimeStampAndVisibility):\n    TYPE_CHOICES = [",
+        "peekOfCode": "class Chapter(TimeStampAndVisibility):\n    title = models.CharField(max_length=255)\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True, blank=True)\n    # def save(self, *args, **kwargs):\n    #     if not self.slug:\n    #         self.slug = slugify(self.title)\n    #     super().save(*args, **kwargs)\n    def __str__(self):\n        return self.title\nclass Lesson(TimeStampAndVisibility):",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1416,7 +1532,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Lesson(TimeStampAndVisibility):\n    TYPE_CHOICES = [\n        (1, 'Content'),\n        (2, 'Quiz'),\n        (3, 'Assignment'),\n    ]\n    chapter = models.ForeignKey('Chapter', on_delete=models.SET_NULL, null=True, blank=True)\n    title = models.CharField(max_length=255)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    video = models.TextField()",
+        "peekOfCode": "class Lesson(TimeStampAndVisibility):\n    TYPE_CHOICES = [\n        (1, 'Content'),\n        (2, 'Quiz'),\n        (3, 'Assignment'),\n    ]\n    chapter = models.ForeignKey('Chapter', on_delete=models.SET_NULL, null=True, blank=True)\n    title = models.CharField(max_length=255)\n    video = models.TextField()\n    type = models.PositiveIntegerField(choices=TYPE_CHOICES, default=1, null=True, blank=True)",
         "detail": "apps.course.models",
         "documentation": {}
     },
