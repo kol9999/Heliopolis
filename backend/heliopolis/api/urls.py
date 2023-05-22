@@ -19,14 +19,20 @@ from api.students.views import RegisterStudent, TestAPIView
 from api.instructor.views import RegisterInstructor
 from api.common.views import Login, OtpValidation
 from rest_framework import routers
-from api.course.views import ChapterViewSet, CourseDetails, CourseViewSet, LessonViewSet
+from api.course.views import (ChapterViewSet, CourseDetails, CoursePublicViewSet, CourseViewSet,
+    EnrollmentViewSet, LessonViewSet)
 
 
 router = routers.DefaultRouter()
 
-router.register('course', CourseViewSet, basename="course"),
-router.register('chapter', ChapterViewSet, basename="chapter"),
-router.register('lesson', LessonViewSet, basename="lesson"),
+router.register('course', CourseViewSet, basename="course")
+router.register('chapter', ChapterViewSet, basename="chapter")
+router.register('lesson', LessonViewSet, basename="lesson")
+router.register('enrollment', EnrollmentViewSet, basename="enrollment")
+
+
+###public view
+router.register('course_public_view', CoursePublicViewSet, basename='course_public_view'),
 
 
 urlpatterns = [

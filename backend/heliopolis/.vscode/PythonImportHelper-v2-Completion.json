@@ -201,6 +201,14 @@
         "documentation": {}
     },
     {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
         "label": "status",
         "importPath": "rest_framework",
         "description": "rest_framework",
@@ -474,6 +482,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -746,23 +770,7 @@
         "documentation": {}
     },
     {
-        "label": "Lesson",
-        "importPath": "apps.course.models",
-        "description": "apps.course.models",
-        "isExtraImport": true,
-        "detail": "apps.course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Chapter",
-        "importPath": "apps.course.models",
-        "description": "apps.course.models",
-        "isExtraImport": true,
-        "detail": "apps.course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Course",
+        "label": "Enrollment",
         "importPath": "apps.course.models",
         "description": "apps.course.models",
         "isExtraImport": true,
@@ -787,6 +795,46 @@
     },
     {
         "label": "Course",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Enrollment",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Lesson",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Chapter",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Course",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Enrollment",
         "importPath": "apps.course.models",
         "description": "apps.course.models",
         "isExtraImport": true,
@@ -818,6 +866,14 @@
         "documentation": {}
     },
     {
+        "label": "EnrollmentSerializer",
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "isExtraImport": true,
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
         "label": "LessonSerializer",
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
@@ -839,6 +895,14 @@
         "description": "rest_framework.exceptions",
         "isExtraImport": true,
         "detail": "rest_framework.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "django.core.exceptions",
+        "description": "django.core.exceptions",
+        "isExtraImport": true,
+        "detail": "django.core.exceptions",
         "documentation": {}
     },
     {
@@ -938,7 +1002,23 @@
         "documentation": {}
     },
     {
+        "label": "CoursePublicViewSet",
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "isExtraImport": true,
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
         "label": "CourseViewSet",
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "isExtraImport": true,
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "EnrollmentViewSet",
         "importPath": "api.course.views",
         "description": "api.course.views",
         "isExtraImport": true,
@@ -951,6 +1031,14 @@
         "description": "api.course.views",
         "isExtraImport": true,
         "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
         "documentation": {}
     },
     {
@@ -1328,7 +1416,7 @@
         "kind": 6,
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
-        "peekOfCode": "class ChapterSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Chapter\n        fields = '__all__'\nclass LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'",
+        "peekOfCode": "class ChapterSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Chapter\n        fields = '__all__'\nclass LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'\nclass EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:",
         "detail": "api.course.serializers",
         "documentation": {}
     },
@@ -1337,7 +1425,16 @@
         "kind": 6,
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
-        "peekOfCode": "class LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'",
+        "peekOfCode": "class LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'\nclass EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'",
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "EnrollmentSerializer",
+        "kind": 6,
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "peekOfCode": "class EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'",
         "detail": "api.course.serializers",
         "documentation": {}
     },
@@ -1347,6 +1444,24 @@
         "importPath": "api.course.views",
         "description": "api.course.views",
         "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner').order_by('-updated_at')",
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "EnrollmentViewSet",
+        "kind": 6,
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "peekOfCode": "class EnrollmentViewSet(viewsets.ModelViewSet):\n    serializer_class = EnrollmentSerializer\n    http_method_names = ['post']\n    queryset = Enrollment.objects.select_related('course', 'student').all()\n    def perform_create(self, serializer):\n        user = self.request.user\n        course = serializer.validated_data['course']\n        try:\n            course_obj = Course.objects.values('active').get(pk = course.pk)\n            if not course_obj['active']:",
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "CoursePublicViewSet",
+        "kind": 6,
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "peekOfCode": "class CoursePublicViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    http_method_names = [\"get\"]\n    def get_queryset(self):\n        return Course.objects.filter(active=True).select_related('category', 'owner').order_by('-updated_at')\nclass ChapterViewSet(viewsets.ModelViewSet):\n    serializer_class = ChapterSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1427,7 +1542,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\"),\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\"),\nrouter.register('lesson', LessonViewSet, basename=\"lesson\"),\nurlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # course details\n    path('course_details/', CourseDetails.as_view(), name=\"course details\"),\n    # student registration",
+        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\")\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\")\nrouter.register('lesson', LessonViewSet, basename=\"lesson\")\nrouter.register('enrollment', EnrollmentViewSet, basename=\"enrollment\")\n###public view\nrouter.register('course_public_view', CoursePublicViewSet, basename='course_public_view'),\nurlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -1558,6 +1673,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0009_enrollment",
+        "description": "apps.course.migrations.0009_enrollment",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"course\", \"0008_alter_lesson_video\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Enrollment\",\n            fields=[\n                (",
+        "detail": "apps.course.migrations.0009_enrollment",
+        "documentation": {}
+    },
+    {
         "label": "CourseConfig",
         "kind": 6,
         "importPath": "apps.course.apps",
@@ -1607,7 +1731,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Quiz(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    question = models.TextField()\n    correct_ans = models.IntegerField()\n    options = models.JSONField()\nclass Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')",
+        "peekOfCode": "class Quiz(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    question = models.TextField()\n    correct_ans = models.IntegerField()\n    options = models.JSONField()\nclass Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')\nclass Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1616,7 +1740,16 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')",
+        "peekOfCode": "class Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')\nclass Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)",
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Enrollment",
+        "kind": 6,
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "peekOfCode": "class Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)",
         "detail": "apps.course.models",
         "documentation": {}
     },

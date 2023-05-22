@@ -78,3 +78,7 @@ class Quiz(TimeStampAndVisibility):
 class Attachment(TimeStampAndVisibility):
     section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)
     file = models.FileField(upload_to='attachment')
+
+class Enrollment(TimeStampAndVisibility):
+    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
+    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)

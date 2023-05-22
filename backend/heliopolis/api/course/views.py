@@ -1,14 +1,17 @@
 
 from rest_framework import viewsets
-from api.course.serializers import ChapterSerializer, CourseSerializer, LessonSerializer
+from api.course.serializers import (ChapterSerializer, CourseSerializer, EnrollmentSerializer,
+    LessonSerializer)
 from rest_framework.permissions import IsAuthenticated
-from apps.course.models import Chapter, Course, Lesson
+from apps.course.models import Chapter, Course, Enrollment, Lesson
 from rest_framework.exceptions import PermissionDenied
 import rest_framework.views
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ValidationError
+from rest_framework import serializers
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -35,6 +38,36 @@ class CourseViewSet(viewsets.ModelViewSet):
             # User does not have permission to edit the course
             raise PermissionDenied("You do not have permission to edit this course.")
 
+
+class EnrollmentViewSet(viewsets.ModelViewSet):
+    serializer_class = EnrollmentSerializer
+    http_method_names = ['post']
+    queryset = Enrollment.objects.select_related('course', 'student').all()
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        course = serializer.validated_data['course']
+        
+
+        try:
+            course_obj = Course.objects.values('active').get(pk = course.pk)
+            if not course_obj['active']:
+                raise ValidationError('Inactive course can\'t enroll')
+        except:
+            raise ValidationError('Course not found')
+        enroll_obj = Enrollment.objects.filter(course=course).exists()
+        if enroll_obj:
+            raise serializers.ValidationError('Already enrolled')
+        serializer.save(student=user)
+
+
+class CoursePublicViewSet(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+    http_method_names = ["get"]
+
+
+    def get_queryset(self):
+        return Course.objects.filter(active=True).select_related('category', 'owner').order_by('-updated_at')
 
 class ChapterViewSet(viewsets.ModelViewSet):
 
