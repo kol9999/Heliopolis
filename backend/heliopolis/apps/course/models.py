@@ -55,8 +55,7 @@ class Lesson(TimeStampAndVisibility):
     ]
     chapter = models.ForeignKey('Chapter', on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=255)
-    
-    video = models.TextField()
+    video = models.FileField(upload_to='chapter', null=True, blank=True)
     type = models.PositiveIntegerField(choices=TYPE_CHOICES, default=1, null=True, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)  # thumbnail
 

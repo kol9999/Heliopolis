@@ -442,6 +442,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -954,6 +986,14 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
         "label": "django.contrib.auth.models",
         "kind": 6,
         "isExtraImport": true,
@@ -1232,6 +1272,14 @@
         "documentation": {}
     },
     {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
         "label": "get_wsgi_application",
         "importPath": "django.core.wsgi",
         "description": "django.core.wsgi",
@@ -1298,7 +1346,7 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner')",
+        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner').order_by('-updated_at')",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1492,6 +1540,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0007_alter_lesson_video",
+        "description": "apps.course.migrations.0007_alter_lesson_video",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"course\", \"0006_remove_chapter_slug_remove_lesson_slug\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"lesson\",\n            name=\"video\",\n            field=models.FileField(upload_to=\"chapter\"),\n        ),",
+        "detail": "apps.course.migrations.0007_alter_lesson_video",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0008_alter_lesson_video",
+        "description": "apps.course.migrations.0008_alter_lesson_video",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"course\", \"0007_alter_lesson_video\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"lesson\",\n            name=\"video\",\n            field=models.FileField(blank=True, null=True, upload_to=\"chapter\"),\n        ),",
+        "detail": "apps.course.migrations.0008_alter_lesson_video",
+        "documentation": {}
+    },
+    {
         "label": "CourseConfig",
         "kind": 6,
         "importPath": "apps.course.apps",
@@ -1532,7 +1598,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Lesson(TimeStampAndVisibility):\n    TYPE_CHOICES = [\n        (1, 'Content'),\n        (2, 'Quiz'),\n        (3, 'Assignment'),\n    ]\n    chapter = models.ForeignKey('Chapter', on_delete=models.SET_NULL, null=True, blank=True)\n    title = models.CharField(max_length=255)\n    video = models.TextField()\n    type = models.PositiveIntegerField(choices=TYPE_CHOICES, default=1, null=True, blank=True)",
+        "peekOfCode": "class Lesson(TimeStampAndVisibility):\n    TYPE_CHOICES = [\n        (1, 'Content'),\n        (2, 'Quiz'),\n        (3, 'Assignment'),\n    ]\n    chapter = models.ForeignKey('Chapter', on_delete=models.SET_NULL, null=True, blank=True)\n    title = models.CharField(max_length=255)\n    video = models.FileField(upload_to='chapter', null=True, blank=True)\n    type = models.PositiveIntegerField(choices=TYPE_CHOICES, default=1, null=True, blank=True)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1784,7 +1850,52 @@
         "kind": 5,
         "importPath": "heliopolis.settings",
         "description": "heliopolis.settings",
-        "peekOfCode": "REST_FRAMEWORK = {\n    # 'DEFAULT_PERMISSION_CLASSES': [\n    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    # ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100\n}\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/",
+        "peekOfCode": "REST_FRAMEWORK = {\n    # 'DEFAULT_PERMISSION_CLASSES': [\n    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'\n    # ],\n    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',\n    'PAGE_SIZE': 100\n}\nSTATIC_URL = '/static/'\nSTATIC_ROOT = BASE_DIR / '../staticfiles'",
+        "detail": "heliopolis.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "heliopolis.settings",
+        "description": "heliopolis.settings",
+        "peekOfCode": "STATIC_URL = '/static/'\nSTATIC_ROOT = BASE_DIR / '../staticfiles'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = BASE_DIR / '../media'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/\nLANGUAGE_CODE = \"en-us\"",
+        "detail": "heliopolis.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_ROOT",
+        "kind": 5,
+        "importPath": "heliopolis.settings",
+        "description": "heliopolis.settings",
+        "peekOfCode": "STATIC_ROOT = BASE_DIR / '../staticfiles'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = BASE_DIR / '../media'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/\nLANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"",
+        "detail": "heliopolis.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "kind": 5,
+        "importPath": "heliopolis.settings",
+        "description": "heliopolis.settings",
+        "peekOfCode": "MEDIA_URL = '/media/'\nMEDIA_ROOT = BASE_DIR / '../media'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/\nLANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True",
+        "detail": "heliopolis.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "heliopolis.settings",
+        "description": "heliopolis.settings",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR / '../media'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/\nLANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True",
+        "detail": "heliopolis.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "heliopolis.settings",
+        "description": "heliopolis.settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.2/topics/i18n/\nLANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)",
         "detail": "heliopolis.settings",
         "documentation": {}
     },
@@ -1847,7 +1958,7 @@
         "kind": 5,
         "importPath": "heliopolis.urls",
         "description": "heliopolis.urls",
-        "peekOfCode": "urlpatterns = [\n    path(\"admin/\", admin.site.urls),\n    path('api/v1/', include('api.urls')),\n]",
+        "peekOfCode": "urlpatterns = [\n    path(\"admin/\", admin.site.urls),\n    path('api/v1/', include('api.urls')),\n]\nif settings.DEBUG:\n    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\n    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "heliopolis.urls",
         "documentation": {}
     },

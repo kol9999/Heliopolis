@@ -23,7 +23,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Course.objects.filter(owner=user).select_related('category', 'owner')
+        return Course.objects.filter(owner=user).select_related('category', 'owner').order_by('-updated_at')
 
     def perform_update(self, serializer):
         # Retrieve the current user
@@ -107,8 +107,9 @@ class CourseDetails(APIView):
                         lesson_data = {
                             'id': lesson.pk,
                             'lesson_title': lesson.title,
-                            'lesson_video': lesson.video,
-                            'lesson_image': lesson.image.url if lesson.image else None
+                            'lesson_video': f'http://127.0.0.1:8000{lesson.video.url}' if lesson.video else None,
+                            'lesson_image': lesson.image.url if lesson.image else None,
+                            'lesson_type':lesson.type
                         }
 
                         chapter_data['lessons'].append(lesson_data)
