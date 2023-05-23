@@ -30,22 +30,25 @@ const videoUrl = ref();
 
 const showModalQuestion = ref(false);
 
-const option_a  = ref({
-  "value":1,
-  "state":false
-})
-const option_b  = ref({
-  "value":2,
-  "state":false
-})
-const option_c  = ref({
-  "value":3,
-  "state":false
-})
-const option_d  = ref({
-  "value":4,
-  "state":false
-})
+const option_a = ref({
+  value: 1,
+  state: false,
+});
+const option_b = ref({
+  value: 2,
+  state: false,
+});
+const option_c = ref({
+  value: 3,
+  state: false,
+});
+const option_d = ref({
+  value: 4,
+  state: false,
+});
+
+const router = useRouter();
+
 
 function expand_btn(index, id) {
   selected_index.value = index;
@@ -54,17 +57,24 @@ function expand_btn(index, id) {
 }
 
 async function retrive_course_data() {
+  const token = localStorage.getItem("token");
   await axios
     .get(
       `http://127.0.0.1:8000/api/v1/course_details/?course_id=${parseInt(
         route.params.id
-      )}`
+      )}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
     )
     .then((res) => {
       course_details.value = res.data;
     })
     .catch((err) => {
       console.log(err);
+      router.push({path:'/'})
     });
 }
 function toggleModal() {
@@ -817,7 +827,12 @@ onMounted(async () => {
                         <label
                           class="relative inline-flex items-center mr-5 cursor-pointer"
                         >
-                          <input type="checkbox" v-model="option_a" class="sr-only peer" checked />
+                          <input
+                            type="checkbox"
+                            v-model="option_a"
+                            class="sr-only peer"
+                            checked
+                          />
 
                           <div
                             class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
@@ -852,7 +867,12 @@ onMounted(async () => {
                         <label
                           class="relative inline-flex items-center mr-5 cursor-pointer"
                         >
-                          <input type="checkbox" v-model="option_b" class="sr-only peer" checked />
+                          <input
+                            type="checkbox"
+                            v-model="option_b"
+                            class="sr-only peer"
+                            checked
+                          />
                           <div
                             class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
                           ></div>
@@ -885,7 +905,12 @@ onMounted(async () => {
                         <label
                           class="relative inline-flex items-center mr-5 cursor-pointer"
                         >
-                          <input type="checkbox" v-model="option_c" class="sr-only peer" checked />
+                          <input
+                            type="checkbox"
+                            v-model="option_c"
+                            class="sr-only peer"
+                            checked
+                          />
 
                           <div
                             class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
@@ -919,7 +944,12 @@ onMounted(async () => {
                         <label
                           class="relative inline-flex items-center mr-5 cursor-pointer"
                         >
-                          <input type="checkbox" v-model="option_d" class="sr-only peer" checked />
+                          <input
+                            type="checkbox"
+                            v-model="option_d"
+                            class="sr-only peer"
+                            checked
+                          />
 
                           <div
                             class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"

@@ -3,8 +3,9 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const course = ref();
-
+const selected_index = ref()
 const publish = ref(false);
+const router = useRouter();
 
 async function retrive_course_data() {
   const token = localStorage.getItem("token");
@@ -20,14 +21,16 @@ async function retrive_course_data() {
     })
     .catch((err) => {
       console.log(err);
+     
     });
 }
 
 async function publish_change(course_id, present_State) {
+
   // console.log(publish.value)
   const token = localStorage.getItem("token");
   const data = {
-    active: present_State ? true : false,
+    active: !present_State,
   };
   await axios
     .patch(`http://127.0.0.1:8000/api/v1/course/${course_id}/`, data, {
@@ -36,7 +39,9 @@ async function publish_change(course_id, present_State) {
       },
     })
     .then((res) => {
+      retrive_course_data()
       console.log(res);
+      
     })
     .catch((err) => {
       console.log(err);
@@ -101,19 +106,16 @@ onMounted(async () => {
                       class="relative inline-flex items-center mr-5 cursor-pointer"
                     >
                       <input
-                        v-if="i.active === true"
+                        v-if="i.active === true "
                         type="checkbox"
-                        value="true"
                         class="sr-only peer"
-                        @change="publish_change(i.id)"
+                        @change="publish_change(i.id, i.active)"
                         checked
                       />
                       <input
                         v-else
                         type="checkbox"
-                        value="true"
                         class="sr-only peer"
-                        v-model="publish"
                         @change="publish_change(i.id, i.acive)"
                       />
                       <div

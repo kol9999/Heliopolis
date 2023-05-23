@@ -98,7 +98,7 @@ async function signin(){
     localStorage.setItem('token', `Token ${res.data.token}`);
     loading.value = false
     if(res.data.group === 'instructor'){
-      router.push({path:'/instructor'})
+      router.push({path:'/instructor/course/'})
     }
     else{
       router.push({path:'/student'})
