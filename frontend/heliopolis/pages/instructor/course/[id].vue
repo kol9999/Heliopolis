@@ -21,10 +21,31 @@ const inside_tab = ref(false);
 const showModal = ref(false);
 const showModalLesson = ref(false);
 
+const showModalQuiz = ref(false);
+
 const video = ref();
 const seleted_chapter_id = ref();
 
-const videoUrl = ref()
+const videoUrl = ref();
+
+const showModalQuestion = ref(false);
+
+const option_a  = ref({
+  "value":1,
+  "state":false
+})
+const option_b  = ref({
+  "value":2,
+  "state":false
+})
+const option_c  = ref({
+  "value":3,
+  "state":false
+})
+const option_d  = ref({
+  "value":4,
+  "state":false
+})
 
 function expand_btn(index, id) {
   selected_index.value = index;
@@ -52,6 +73,17 @@ function toggleModal() {
 
 function toggleModalLesson() {
   showModalLesson.value = !showModalLesson.value;
+  expand.value = true;
+}
+
+function toggleModalQuiz() {
+  showModalQuiz.value = !showModalQuiz.value;
+  expand.value = true;
+}
+
+function toggleModalQuestion() {
+  console.log("call");
+  showModalQuestion.value = !showModalQuestion.value;
   expand.value = true;
 }
 
@@ -88,44 +120,9 @@ async function upload_chapter() {
     });
 }
 
-// async function upload_lesson() {
-//   loading.value = true;
-//   const token = localStorage.getItem("token");
-//   const data = {
-//     chapter: seleted_chapter_id.value,
-//     title: title.value,
-//     video: video.value,
-//     type: 1,
-//   };
-
-//   await axios
-//     .post("http://127.0.0.1:8000/api/v1/lesson/", data, {
-//       headers: {
-//         Authorization: token,
-//       },
-//     })
-//     .then((res) => {
-//       loading.value = false;
-//       console.log(res.data);
-//       title.value = "";
-//       video.value = "";
-//       retrive_course_data();
-//       expand.value = true;
-//       toggleModalLesson();
-//       // router.push({path:`/instructor/course/${id}/`})
-//     })
-//     .catch((err) => {
-//       loading.value = false;
-//       // title_error.value = err.response.data.title[0];
-//       console.log(err);
-//     });
-// }
-
-
 async function upload_lesson() {
   loading.value = true;
   const token = localStorage.getItem("token");
-  
   const formData = new FormData();
   formData.append("chapter", seleted_chapter_id.value);
   formData.append("title", title.value);
@@ -133,13 +130,17 @@ async function upload_lesson() {
   formData.append("type", 1);
 
   try {
-    const response = await axios.post("http://127.0.0.1:8000/api/v1/lesson/", formData, {
-      headers: {
-        Authorization: token,
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/v1/lesson/",
+      formData,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
     loading.value = false;
     console.log(response.data);
     title.value = "";
@@ -154,14 +155,52 @@ async function upload_lesson() {
   }
 }
 
+// upload quiz
+async function upload_quiz() {
+  loading.value = true;
+  const token = localStorage.getItem("token");
+  const formData = new FormData();
+  const data = {
+    chapter: seleted_chapter_id.value,
+    title: title.value,
+    type: 2,
+  };
+  // formData.append("chapter", seleted_chapter_id.value);
+  // formData.append("title", title.value);
+  // formData.append("video", video.value);
+  // formData.append("type", 1);
+
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/v1/lesson/",
+      data,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    loading.value = false;
+    console.log(response.data);
+    title.value = "";
+    retrive_course_data();
+    expand.value = true;
+    toggleModalQuiz();
+    // router.push({path:`/instructor/course/${id}/`})
+  } catch (error) {
+    loading.value = false;
+    console.log(error);
+  }
+}
+// upload quiz
 
 function handleFileChange(event) {
-    video.value = event.target.files[0];
-    const videourl = URL.createObjectURL(event.target.files[0]);
-    videoUrl.value = videourl
-  }
-
-
+  video.value = event.target.files[0];
+  const videourl = URL.createObjectURL(event.target.files[0]);
+  videoUrl.value = videourl;
+}
 
 onMounted(async () => {
   retrive_course_data();
@@ -256,8 +295,17 @@ onMounted(async () => {
                         />
                       </svg>
                     </div>
-                    <div>
-                      <h1>{{ j.lesson_title }}</h1>
+                    <div class="flex space-x-2 items-center">
+                      <div>
+                        <h1>{{ j.lesson_title }}</h1>
+                      </div>
+                      <div
+                        v-if="j.lesson_type === 2"
+                        class="text-xs italic underline text-blue-600"
+                        @click.stop="toggleModalQuestion"
+                      >
+                        add question
+                      </div>
                     </div>
                   </div>
                   <div class="mx-8" v-if="j.lesson_video">
@@ -266,7 +314,7 @@ onMounted(async () => {
                 </div>
 
                 <div class="flex justify-end mx-4 space-x-2">
-                  <div>
+                  <div @click="toggleModalQuiz()">
                     <p class="underline text-blue-800 italic text-sm">
                       add quiz
                     </p>
@@ -372,7 +420,7 @@ onMounted(async () => {
                 Close
               </button>
               <button
-              v-if="!loading"
+                v-if="!loading"
                 class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
                 v-on:click="upload_chapter()"
@@ -381,10 +429,9 @@ onMounted(async () => {
               </button>
 
               <button
-              v-if="loading"
+                v-if="loading"
                 class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 animate-pulse"
                 type="button"
-               
               >
                 loading...
               </button>
@@ -451,7 +498,10 @@ onMounted(async () => {
                     class="block mb-2 text-sm font-medium text-gray-900"
                     >Video</label
                   >
-                  <div class="flex items-center justify-center w-full" v-if="!videoUrl">
+                  <div
+                    class="flex items-center justify-center w-full"
+                    v-if="!videoUrl"
+                  >
                     <label
                       for="dropzone-file"
                       class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -484,7 +534,12 @@ onMounted(async () => {
                           Mp4(small video for test purpose)
                         </p>
                       </div>
-                      <input id="dropzone-file" type="file" class="hidden" @change="handleFileChange"/>
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        class="hidden"
+                        @change="handleFileChange"
+                      />
                     </label>
                   </div>
 
@@ -529,7 +584,7 @@ onMounted(async () => {
                 Close
               </button>
               <button
-              v-if="!loading"
+                v-if="!loading"
                 class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
                 v-on:click="upload_lesson()"
@@ -537,7 +592,7 @@ onMounted(async () => {
                 Save Changes
               </button>
               <button
-              v-if="loading"
+                v-if="loading"
                 class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 animate-pulse"
                 type="button"
                 v-on:click="upload_lesson()"
@@ -554,6 +609,375 @@ onMounted(async () => {
         class="opacity-25 fixed inset-0 z-40 bg-black"
       ></div>
       <!-- lesson add  -->
+
+      <!-- quiz add -->
+      <div
+        v-if="showModalQuiz"
+        class="overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+      >
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <!--content-->
+          <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+          >
+            <!--header-->
+            <div
+              class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+            >
+              <h3 class="text-2xl font-semibold">Add quiz</h3>
+              <button
+                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                @click="toggleModalQuiz()"
+              >
+                <span
+                  class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+                >
+                  ×
+                </span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="w-[40rem] p-6">
+              <form>
+                <div class="mb-6">
+                  <label
+                    for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Quiz title</label
+                  >
+                  <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                  <input
+                    v-model="title"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                    required
+                  />
+                </div>
+                <!-- <div class="mb-6">
+                  <label
+                    for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Video</label
+                  >
+                  <div class="flex items-center justify-center w-full" v-if="!videoUrl">
+                    <label
+                      for="dropzone-file"
+                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    >
+                      <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="w-10 h-10 mb-3 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                          ></path>
+                        </svg>
+                        <p
+                          class="mb-2 text-sm text-gray-500 dark:text-gray-400"
+                        >
+                          <span class="font-semibold">Click to upload</span> or
+                          drag and drop
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          Mp4(small video for test purpose)
+                        </p>
+                      </div>
+                      <input id="dropzone-file" type="file" class="hidden" @change="handleFileChange"/>
+                    </label>
+                  </div>
+
+                  <div v-else>
+                    <video :src="videoUrl" controls></video>
+                  </div>
+                 
+                </div> -->
+
+                <!-- <button
+                  v-if="!loading"
+                  type="submit"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                >
+                  Submit
+                </button>
+
+                <button
+                  v-if="loading"
+                  type="submit"
+                  class="text-white bg-blue-300 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center animate-pulse"
+                  disabled
+                >
+                  loading...
+                </button> -->
+              </form>
+            </div>
+            <!--footer-->
+            <div
+              class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+            >
+              <button
+                class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-1.5 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                v-on:click="toggleModalQuiz()"
+              >
+                Close
+              </button>
+              <button
+                v-if="!loading"
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                v-on:click="upload_quiz()"
+              >
+                Save Changes
+              </button>
+              <button
+                v-if="loading"
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 animate-pulse"
+                type="button"
+              >
+                loading...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="showModalQuiz"
+        class="opacity-25 fixed inset-0 z-40 bg-black"
+      ></div>
+      <!-- quiz add -->
+
+      <!-- question modal -->
+      <div
+        v-if="showModalQuestion"
+        class="overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+      >
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <!--content-->
+          <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+          >
+            <!--header-->
+            <div
+              class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+            >
+              <h3 class="text-2xl font-semibold">Add qustion</h3>
+              <button
+                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                @click="toggleModalQuestion()"
+              >
+                <span
+                  class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+                >
+                  ×
+                </span>
+              </button>
+            </div>
+            <!--body-->
+            <div class="w-[40rem] p-6">
+              <form>
+                <div class="mb-6">
+                  <label
+                    for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                    >Quetion</label
+                  >
+                  <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                  <input
+                    v-model="title"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                    required
+                  />
+                </div>
+
+                <div class="border-[1px] border-cyan-400 p-4">
+                  <div class="mb-6">
+                    <div class="flex justify-between">
+                      <div>
+                        <label
+                          for="email"
+                          class="block mb-2 text-sm font-medium text-gray-900"
+                          >Option A</label
+                        >
+                      </div>
+                      <div>
+                        <label
+                          class="relative inline-flex items-center mr-5 cursor-pointer"
+                        >
+                          <input type="checkbox" v-model="option_a" class="sr-only peer" checked />
+
+                          <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                          ></div>
+                          <span class="ml-2 text-xs text-gray-500"
+                            >Right ans</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                    <input
+                      v-model="title"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                      required
+                    />
+                  </div>
+
+                  <div class="mb-6">
+                    <div class="flex justify-between">
+                      <div>
+                        <label
+                          for="email"
+                          class="block mb-2 text-sm font-medium text-gray-900"
+                          >Option B</label
+                        >
+                      </div>
+                      <div>
+                        <label
+                          class="relative inline-flex items-center mr-5 cursor-pointer"
+                        >
+                          <input type="checkbox" v-model="option_b" class="sr-only peer" checked />
+                          <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                          ></div>
+                          <span class="ml-2 text-xs text-gray-500"
+                            >Right ans</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                    <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                    <input
+                      v-model="title"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                      required
+                    />
+                  </div>
+
+                  <div class="mb-6">
+                    <div class="flex justify-between">
+                      <div>
+                        <label
+                          for="email"
+                          class="block mb-2 text-sm font-medium text-gray-900"
+                          >Option C</label
+                        >
+                      </div>
+                      <div>
+                        <label
+                          class="relative inline-flex items-center mr-5 cursor-pointer"
+                        >
+                          <input type="checkbox" v-model="option_c" class="sr-only peer" checked />
+
+                          <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                          ></div>
+                          <span class="ml-2 text-xs text-gray-500"
+                            >Right ans</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                    <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                    <input
+                      v-model="title"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                      required
+                    />
+                  </div>
+
+                  <div class="mb-6">
+                    <div class="flex justify-between">
+                      <div>
+                        <label
+                          for="email"
+                          class="block mb-2 text-sm font-medium text-gray-900"
+                          >Option D</label
+                        >
+                      </div>
+                      <div>
+                        <label
+                          class="relative inline-flex items-center mr-5 cursor-pointer"
+                        >
+                          <input type="checkbox" v-model="option_d" class="sr-only peer" checked />
+
+                          <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                          ></div>
+                          <span class="ml-2 text-xs text-gray-500"
+                            >Right ans</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                    <!-- <div class="my-2" v-if="title_error">
+                    <p class="text-red-600 text-sm italic">{{ title_error }}</p>
+                  </div> -->
+                    <input
+                      v-model="title"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                      required
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!--footer-->
+            <div
+              class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+            >
+              <button
+                class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-1.5 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                v-on:click="toggleModalQuestion()"
+              >
+                Close
+              </button>
+              <button
+                v-if="!loading"
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                v-on:click="upload_quiz()"
+              >
+                Save Changes
+              </button>
+              <button
+                v-if="loading"
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 animate-pulse"
+                type="button"
+              >
+                loading...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="showModalQuestion"
+        class="opacity-25 fixed inset-0 z-40 bg-black"
+      ></div>
+      <!-- question modal -->
     </main>
   </div>
 </template>
