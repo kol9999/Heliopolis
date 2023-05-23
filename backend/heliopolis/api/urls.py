@@ -21,6 +21,7 @@ from api.common.views import Login, OtpValidation
 from rest_framework import routers
 from api.course.views import (ChapterViewSet, CourseDetails, CoursePublicViewSet, CourseViewSet,
     EnrollmentViewSet, LessonViewSet)
+from api.course.views import CourseDetailsAfterEnrollment
 
 
 router = routers.DefaultRouter()
@@ -40,6 +41,8 @@ urlpatterns = [
     path('test/', TestAPIView.as_view(), name='test_api_view'),
     # course details
     path('course_details/', CourseDetails.as_view(), name="course details"),
+    #details after enrollment
+    path('course-details-after-enrollment/', CourseDetailsAfterEnrollment.as_view(), name="course-details-after-enrollment"),
     # student registration
     path('register-student/', RegisterStudent.as_view(), name='register_student'),
     # instructor registration

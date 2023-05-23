@@ -7,6 +7,23 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = '__all__'
 
+class CourseSerializerForAuthenticate(serializers.ModelSerializer):
+    enroll_status = serializers.SerializerMethodField(read_only = True)
+    
+    class Meta:
+        model = Course
+        fields = '__all__'
+
+    def get_enroll_status(self, obj):
+        request = self.context.get('request')
+        user = request.user if request and not request.user.is_anonymous else None
+        print(user)
+        enroll_obj = Enrollment.objects.filter(student=user, course=obj).exists()
+        if enroll_obj:
+            return True
+        return False
+
+
 class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chapter
