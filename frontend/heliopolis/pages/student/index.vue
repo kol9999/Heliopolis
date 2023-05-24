@@ -68,7 +68,7 @@ onMounted(async () => {
               class="max-w-sm bg-white border border-gray-200 rounded-lg shadow 0"
             >
               <a href="#">
-                <img class="rounded-t-lg" src="" alt="" />
+                <img class="rounded-t-lg" :src="i.thumbnail" alt="" />
               </a>
               <div class="p-5">
                 <div class="flex justify-between">

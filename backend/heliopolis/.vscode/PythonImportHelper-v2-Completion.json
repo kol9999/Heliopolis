@@ -498,6 +498,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -690,6 +722,14 @@
         "documentation": {}
     },
     {
+        "label": "CustomUser",
+        "importPath": "apps.common.models",
+        "description": "apps.common.models",
+        "isExtraImport": true,
+        "detail": "apps.common.models",
+        "documentation": {}
+    },
+    {
         "label": "TimeStampAndVisibility",
         "importPath": "apps.common.models",
         "description": "apps.common.models",
@@ -786,6 +826,14 @@
         "documentation": {}
     },
     {
+        "label": "ReviewAndRating",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
         "label": "Chapter",
         "importPath": "apps.course.models",
         "description": "apps.course.models",
@@ -811,6 +859,14 @@
     },
     {
         "label": "Lesson",
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "isExtraImport": true,
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "ReviewAndRating",
         "importPath": "apps.course.models",
         "description": "apps.course.models",
         "isExtraImport": true,
@@ -858,7 +914,23 @@
         "documentation": {}
     },
     {
+        "label": "CourseReviewSerializer",
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "isExtraImport": true,
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
         "label": "CourseSerializer",
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "isExtraImport": true,
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CourseSerializerForAuthenticate",
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
         "isExtraImport": true,
@@ -1031,6 +1103,30 @@
         "description": "api.course.views",
         "isExtraImport": true,
         "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "ReviewAndRetingViewSet",
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "isExtraImport": true,
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "CourseDetailsAfterEnrollment",
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "isExtraImport": true,
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
         "documentation": {}
     },
     {
@@ -1407,7 +1503,16 @@
         "kind": 6,
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
-        "peekOfCode": "class CourseSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Course\n        fields = '__all__'\nclass ChapterSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Chapter\n        fields = '__all__'\nclass LessonSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "peekOfCode": "class CourseSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Course\n        fields = '__all__'\nclass CourseSerializerForAuthenticate(serializers.ModelSerializer):\n    enroll_status = serializers.SerializerMethodField(read_only = True)\n    class Meta:\n        model = Course\n        fields = '__all__'\n    def get_enroll_status(self, obj):",
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CourseSerializerForAuthenticate",
+        "kind": 6,
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "peekOfCode": "class CourseSerializerForAuthenticate(serializers.ModelSerializer):\n    enroll_status = serializers.SerializerMethodField(read_only = True)\n    class Meta:\n        model = Course\n        fields = '__all__'\n    def get_enroll_status(self, obj):\n        request = self.context.get('request')\n        user = request.user if request and not request.user.is_anonymous else None\n        print(user)\n        enroll_obj = Enrollment.objects.filter(student=user, course=obj).exists()",
         "detail": "api.course.serializers",
         "documentation": {}
     },
@@ -1425,7 +1530,7 @@
         "kind": 6,
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
-        "peekOfCode": "class LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'\nclass EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'",
+        "peekOfCode": "class LessonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Lesson\n        fields = '__all__'\nclass EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'\nclass CourseReviewSerializer(serializers.ModelSerializer):\n    class Meta:",
         "detail": "api.course.serializers",
         "documentation": {}
     },
@@ -1434,7 +1539,16 @@
         "kind": 6,
         "importPath": "api.course.serializers",
         "description": "api.course.serializers",
-        "peekOfCode": "class EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'",
+        "peekOfCode": "class EnrollmentSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Enrollment\n        fields = '__all__'\nclass CourseReviewSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ReviewAndRating\n        fields = '__all__'\n    def to_representation(self, instance):\n        # Customize the representation of the serialized object",
+        "detail": "api.course.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CourseReviewSerializer",
+        "kind": 6,
+        "importPath": "api.course.serializers",
+        "description": "api.course.serializers",
+        "peekOfCode": "class CourseReviewSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ReviewAndRating\n        fields = '__all__'\n    def to_representation(self, instance):\n        # Customize the representation of the serialized object\n        representation = super().to_representation(instance)\n        try:\n            user = CustomUser.objects.get(pk = instance.student.pk)\n            representation['student'] = user.email",
         "detail": "api.course.serializers",
         "documentation": {}
     },
@@ -1443,7 +1557,7 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner').order_by('-updated_at')",
+        "peekOfCode": "class CourseViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()\n    def perform_create(self, serializer):\n        serializer.save(owner=self.request.user)\n    def get_queryset(self):\n        user = self.request.user\n        return Course.objects.filter(owner=user).select_related('category', 'owner').order_by('-id')",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1461,7 +1575,7 @@
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class CoursePublicViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    http_method_names = [\"get\"]\n    def get_queryset(self):\n        return Course.objects.filter(active=True).select_related('category', 'owner').order_by('-updated_at')\nclass ChapterViewSet(viewsets.ModelViewSet):\n    serializer_class = ChapterSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = [\"get\", \"patch\", \"post\"]\n    # queryset = Course.objects.select_related('category', 'owner').all()",
+        "peekOfCode": "class CoursePublicViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseSerializer\n    http_method_names = [\"get\"]\n    def get_serializer_class(self):\n        user = self.request.user\n        if user:\n            return CourseSerializerForAuthenticate\n        return self.serializer_class\n    def get_queryset(self):\n        return Course.objects.filter(active=True).select_related('category', 'owner').order_by('-updated_at')",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1484,11 +1598,29 @@
         "documentation": {}
     },
     {
+        "label": "ReviewAndRetingViewSet",
+        "kind": 6,
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "peekOfCode": "class ReviewAndRetingViewSet(viewsets.ModelViewSet):\n    serializer_class = CourseReviewSerializer\n    permission_classes = (IsAuthenticated,)\n    http_method_names = ['get', 'post']\n    def get_queryset(self):\n        query_params = self.request.query_params.get('course_id')\n        if not query_params:\n            raise serializers.ValidationError('course_id query parameter is required')\n        obj = ReviewAndRating.objects.select_related('student', 'course').filter(course=query_params)\n        print(obj)",
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
         "label": "CourseDetails",
         "kind": 6,
         "importPath": "api.course.views",
         "description": "api.course.views",
-        "peekOfCode": "class CourseDetails(APIView):\n    def get(self, request):\n        course_id = request.query_params.get('course_id')\n        if course_id:\n            course_obj = get_object_or_404(Course, id=course_id)\n            data = {\n                'title' : course_obj.title,\n                'description' : course_obj.description,\n                'chapters' : []\n            }",
+        "peekOfCode": "class CourseDetails(APIView):\n    permission_classes = (IsAuthenticated,)\n    def get(self, request):\n        course_id = request.query_params.get('course_id')\n        user = request.user\n        print(user)\n        is_his_course = Course.objects.filter(owner = user).exists()\n        if not is_his_course:\n            return Response({'message': 'Permission not allowed'}, status=status.HTTP_403_FORBIDDEN,)\n        if course_id:",
+        "detail": "api.course.views",
+        "documentation": {}
+    },
+    {
+        "label": "CourseDetailsAfterEnrollment",
+        "kind": 6,
+        "importPath": "api.course.views",
+        "description": "api.course.views",
+        "peekOfCode": "class CourseDetailsAfterEnrollment(APIView):\n    permission_classes = (IsAuthenticated,)\n    def get(self, request):\n        course_id = request.query_params.get('course_id')\n        user = request.user\n        is_he_enroll = Enrollment.objects.filter(course=course_id, student=user).exists()\n        if not is_he_enroll:\n            return Response({'message': 'Permission not allowed'}, status=status.HTTP_403_FORBIDDEN,)\n        if course_id:\n            course_obj = get_object_or_404(Course, id=course_id)",
         "detail": "api.course.views",
         "documentation": {}
     },
@@ -1542,7 +1674,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\")\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\")\nrouter.register('lesson', LessonViewSet, basename=\"lesson\")\nrouter.register('enrollment', EnrollmentViewSet, basename=\"enrollment\")\n###public view\nrouter.register('course_public_view', CoursePublicViewSet, basename='course_public_view'),\nurlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),",
+        "peekOfCode": "router = routers.DefaultRouter()\nrouter.register('course', CourseViewSet, basename=\"course\")\nrouter.register('chapter', ChapterViewSet, basename=\"chapter\")\nrouter.register('lesson', LessonViewSet, basename=\"lesson\")\nrouter.register('enrollment', EnrollmentViewSet, basename=\"enrollment\")\nrouter.register('review_rating', ReviewAndRetingViewSet, basename=\"review_rating\")\n###public view\nrouter.register('course_public_view', CoursePublicViewSet, basename='course_public_view'),\nurlpatterns = [\n    path('', include(router.urls)),",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -1551,7 +1683,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # course details\n    path('course_details/', CourseDetails.as_view(), name=\"course details\"),\n    # student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    # instructor registration\n    path('register-instructor/', RegisterInstructor.as_view(), name='register_instructor'),\n    # token validation",
+        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('test/', TestAPIView.as_view(), name='test_api_view'),\n    # course details\n    path('course_details/', CourseDetails.as_view(), name=\"course details\"),\n    #details after enrollment\n    path('course-details-after-enrollment/', CourseDetailsAfterEnrollment.as_view(), name=\"course-details-after-enrollment\"),\n    # student registration\n    path('register-student/', RegisterStudent.as_view(), name='register_student'),\n    # instructor registration",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -1682,6 +1814,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0010_reviewandrating",
+        "description": "apps.course.migrations.0010_reviewandrating",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        (\"course\", \"0009_enrollment\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"ReviewAndRating\",\n            fields=[\n                (",
+        "detail": "apps.course.migrations.0010_reviewandrating",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.course.migrations.0011_course_thumbnail",
+        "description": "apps.course.migrations.0011_course_thumbnail",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"course\", \"0010_reviewandrating\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"course\",\n            name=\"thumbnail\",\n            field=models.ImageField(blank=True, null=True, upload_to=\"course\"),\n        ),",
+        "detail": "apps.course.migrations.0011_course_thumbnail",
+        "documentation": {}
+    },
+    {
         "label": "CourseConfig",
         "kind": 6,
         "importPath": "apps.course.apps",
@@ -1704,7 +1854,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255, unique=True)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    description = models.TextField(null=True, blank=True)\n    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)\n        super().save(*args, **kwargs)",
+        "peekOfCode": "class Course(TimeStampAndVisibility):\n    title = models.CharField(max_length=255, unique=True)\n    slug = models.SlugField(unique=True, null=True, blank=True)\n    category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)\n    description = models.TextField(null=True, blank=True)\n    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')\n    thumbnail = models.ImageField(upload_to='course', null=True, blank=True)\n    def save(self, *args, **kwargs):\n        if not self.slug:\n            self.slug = slugify(self.title)",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1740,7 +1890,7 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')\nclass Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)",
+        "peekOfCode": "class Attachment(TimeStampAndVisibility):\n    section = models.ForeignKey('Lesson', on_delete=models.SET_NULL, null=True, blank=True)\n    file = models.FileField(upload_to='attachment')\nclass Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)\nclass ReviewAndRating(TimeStampAndVisibility):\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)\n    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)\n    review = models.TextField()",
         "detail": "apps.course.models",
         "documentation": {}
     },
@@ -1749,7 +1899,16 @@
         "kind": 6,
         "importPath": "apps.course.models",
         "description": "apps.course.models",
-        "peekOfCode": "class Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)",
+        "peekOfCode": "class Enrollment(TimeStampAndVisibility):\n    course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)\nclass ReviewAndRating(TimeStampAndVisibility):\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)\n    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)\n    review = models.TextField()\n    rating = models.FloatField()",
+        "detail": "apps.course.models",
+        "documentation": {}
+    },
+    {
+        "label": "ReviewAndRating",
+        "kind": 6,
+        "importPath": "apps.course.models",
+        "description": "apps.course.models",
+        "peekOfCode": "class ReviewAndRating(TimeStampAndVisibility):\n    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)\n    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)\n    review = models.TextField()\n    rating = models.FloatField()",
         "detail": "apps.course.models",
         "documentation": {}
     },

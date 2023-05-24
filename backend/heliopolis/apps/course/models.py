@@ -23,6 +23,7 @@ class Course(TimeStampAndVisibility):
     category = models.ForeignKey('Category', on_delete=SET_NULL, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='course_owner')
+    thumbnail = models.ImageField(upload_to='course', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -82,3 +83,9 @@ class Attachment(TimeStampAndVisibility):
 class Enrollment(TimeStampAndVisibility):
     course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+
+class ReviewAndRating(TimeStampAndVisibility):
+    student = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    review = models.TextField()
+    rating = models.FloatField()

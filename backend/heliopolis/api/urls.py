@@ -20,7 +20,7 @@ from api.instructor.views import RegisterInstructor
 from api.common.views import Login, OtpValidation
 from rest_framework import routers
 from api.course.views import (ChapterViewSet, CourseDetails, CoursePublicViewSet, CourseViewSet,
-    EnrollmentViewSet, LessonViewSet)
+    EnrollmentViewSet, LessonViewSet, ReviewAndRetingViewSet)
 from api.course.views import CourseDetailsAfterEnrollment
 
 
@@ -30,6 +30,8 @@ router.register('course', CourseViewSet, basename="course")
 router.register('chapter', ChapterViewSet, basename="chapter")
 router.register('lesson', LessonViewSet, basename="lesson")
 router.register('enrollment', EnrollmentViewSet, basename="enrollment")
+router.register('review_rating', ReviewAndRetingViewSet, basename="review_rating")
+
 
 
 ###public view

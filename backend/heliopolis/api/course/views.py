@@ -1,9 +1,9 @@
 
 from rest_framework import viewsets
-from api.course.serializers import (ChapterSerializer, CourseSerializer, EnrollmentSerializer,
-    LessonSerializer, CourseSerializerForAuthenticate)
+from api.course.serializers import (ChapterSerializer, CourseReviewSerializer, CourseSerializer,
+    CourseSerializerForAuthenticate, EnrollmentSerializer, LessonSerializer)
 from rest_framework.permissions import IsAuthenticated
-from apps.course.models import Chapter, Course, Enrollment, Lesson
+from apps.course.models import Chapter, Course, Enrollment, Lesson, ReviewAndRating
 from rest_framework.exceptions import PermissionDenied
 import rest_framework.views
 from rest_framework.views import APIView
@@ -58,6 +58,8 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         if enroll_obj:
             raise serializers.ValidationError('Already enrolled')
         serializer.save(student=user)
+
+
 
 
 class CoursePublicViewSet(viewsets.ModelViewSet):
@@ -116,6 +118,36 @@ class LessonViewSet(viewsets.ModelViewSet):
         else:
             # User does not have permission to edit the course
             raise PermissionDenied("You do not have permission to edit this course.")
+        
+class ReviewAndRetingViewSet(viewsets.ModelViewSet):
+    serializer_class = CourseReviewSerializer
+    permission_classes = (IsAuthenticated,)
+    http_method_names = ['get', 'post']
+
+    def get_queryset(self):
+        query_params = self.request.query_params.get('course_id')
+        if not query_params:
+            raise serializers.ValidationError('course_id query parameter is required')
+        
+        obj = ReviewAndRating.objects.select_related('student', 'course').filter(course=query_params)
+        print(obj)
+        if obj:
+            return obj
+        raise serializers.ValidationError('Review and Rating not found for the given course_id')
+
+
+    def perform_create(self, serializer):
+        query_params = self.request.query_params.get('course_id')
+        try:
+            course = Course.objects.get(pk = query_params)
+        except:
+            raise serializers.ValidationError('Course not found')
+        course_obj = ReviewAndRating.objects.filter(student = self.request.user, course = course).exists()
+        print(course_obj)
+        if course_obj:
+            raise serializers.ValidationError('One student can give only one review for a course')
+        
+        serializer.save(student=self.request.user, course=course)
 
 
 class CourseDetails(APIView):

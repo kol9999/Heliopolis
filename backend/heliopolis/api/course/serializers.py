@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from apps.course.models import Chapter, Course, Enrollment, Lesson
+from apps.course.models import Chapter, Course, Enrollment, Lesson, ReviewAndRating
+from apps.common.models import CustomUser
 
 class CourseSerializer(serializers.ModelSerializer):
     
@@ -38,3 +39,23 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = '__all__'
+
+
+class CourseReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ReviewAndRating
+        fields = '__all__'
+    
+    def to_representation(self, instance):
+        # Customize the representation of the serialized object
+        representation = super().to_representation(instance)
+        try:
+            user = CustomUser.objects.get(pk = instance.student.pk)
+            representation['student'] = user.email
+            return representation
+        except:
+        # Modify the 'representation' dictionary as needed
+        
+            return representation
+
