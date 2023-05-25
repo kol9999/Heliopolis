@@ -52,6 +52,7 @@ function lesson(obj) {
 
 async function open_review() {
   show_review.value = !show_review.value;
+  lesson_section_open.value = false;
   await retrive_review();
 }
 

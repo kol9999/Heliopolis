@@ -155,6 +155,7 @@ async function upload_lesson() {
     console.log(response.data);
     title.value = "";
     video.value = "";
+    videoUrl.value = ''
     retrive_course_data();
     expand.value = true;
     toggleModalLesson();
