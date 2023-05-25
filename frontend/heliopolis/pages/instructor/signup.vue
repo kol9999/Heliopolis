@@ -77,7 +77,7 @@ async function submit_otp(){
         loading.value = false;
         show_bottom_msg("account verified");
         localStorage.setItem('token', `Token ${res.data.message.token}`);
-        router.push({ path: '/instructor' })
+        router.push({ path: '/instructor/course/' })
     })
     .catch((err) => {
         loading.value = false;
