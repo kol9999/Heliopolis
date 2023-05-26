@@ -54,6 +54,21 @@ function handleFileChange(event) {
   image_url.value = imageUrl;
 }
 
+async function logout() {
+  const token = localStorage.getItem("token");
+  const data ={}
+  await axios
+    .post("http://127.0.0.1:8000/api/v1/logout/", data,{
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      localStorage.removeItem("token");
+      router.push({ path: "/" });
+    });
+}
+
 
 
 // // lifecycle hooks
@@ -67,7 +82,18 @@ function handleFileChange(event) {
     <aside
       class="w-56 fixed left-0 top-0 h-screen bg-gray-200 rounded-r-lg drop-shadow-md p-10"
     >
-      <h1 class="text-xl text-center font-semibold">Heliopolis</h1>
+      <div class="flex flex-col justify-between" style="height: 90vh">
+        <div>
+          <h1 class="text-xl text-center font-semibold">Heliopolis</h1>
+        </div>
+        <div @click="logout">
+          <button
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
     </aside>
     <main class="flex-1 ml-44">
       <div class="m-20">

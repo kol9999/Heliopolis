@@ -83,20 +83,18 @@ async function submit_review() {
     )
     .then((res) => {
       console.log(res);
-      review.value = ''
-      rating.value = ''
-      retrive_review()
+      review.value = "";
+      rating.value = "";
+      retrive_review();
     })
     .catch((err) => {
-      error.value = err.response.data[0]
+      error.value = err.response.data[0];
       console.log(err);
-      console.log(error.value)
+      console.log(error.value);
     });
 }
 
 const review_obj = ref();
-
-
 
 async function retrive_review() {
   const token = localStorage.getItem("token");
@@ -120,6 +118,21 @@ async function retrive_review() {
     });
 }
 
+async function logout() {
+  const token = localStorage.getItem("token");
+  const data = {};
+  await axios
+    .post("http://127.0.0.1:8000/api/v1/logout/", data, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => {
+      localStorage.removeItem("token");
+      router.push({ path: "/" });
+    });
+}
+
 onMounted(async () => {
   await retrive_course_data();
 });
@@ -132,55 +145,73 @@ onMounted(async () => {
     >
       <h1 class="text-xl text-center font-semibold">Heliopolis</h1>
 
-      <div v-if="course_details" class="m-6 py-4">
-        <div v-for="(i, index) in course_details.chapters" :key="i.id">
-          <div
-            class="my-2 transform ease-in-out duration-150 hover:bg-slate-300 rounded-md p-1 border-2 border-gray-300"
-            role="button"
-          >
-            <div class="flex justify-between" @click="expand_chapter(index)">
-              <div>
-                <h1>Chaper {{ index + 1 }}: {{ i.chapter_title }}</h1>
+      <div>
+        <div v-if="course_details" class="m-6 py-4">
+          <div v-for="(i, index) in course_details.chapters" :key="i.id">
+            <div
+              class="my-2 transform ease-in-out duration-150 hover:bg-slate-300 rounded-md p-1 border-2 border-gray-300"
+              role="button"
+            >
+              <div class="flex justify-between" @click="expand_chapter(index)">
+                <div>
+                  <h1>Chaper {{ index + 1 }}: {{ i.chapter_title }}</h1>
+                </div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                </div>
               </div>
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div v-if="selected_index === index && open" class="">
-              <div v-for="(j, index) in i.lessons" :key="index" class="my-4">
-                <div
-                  class="transform ease-in-out duration-150 hover:bg-slate-200 rounded-md px-2"
-                  @click="lesson(j)"
-                >
-                  <h1>{{ j.lesson_title }}</h1>
+              <div v-if="selected_index === index && open" class="">
+                <div v-for="(j, index) in i.lessons" :key="index" class="my-4">
+                  <div
+                    class="transform ease-in-out duration-150 hover:bg-slate-200 rounded-md px-2"
+                    @click="lesson(j)"
+                  >
+                    <h1>{{ j.lesson_title }}</h1>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="flex justify-center items-center">
-        <button
-          type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-          @click="open_review"
-        >
-          Give a review
-        </button>
+        <div class="flex  flex-col justify-between" style="height: 60vh">
+          <div>
+            <div class="flex justify-center items-center">
+              <button
+                type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                @click="open_review"
+              >
+                Give a review
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <div @click="logout">
+                <button
+                  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </aside>
     <main class="flex-1 ml-[21rem] mt-10">
@@ -199,9 +230,7 @@ onMounted(async () => {
               <div class="w-12 h-12 rounded-full bg-rose-500"></div>
               <div>
                 <h1 class="text-xs text-gray-400">{{ i.student }}</h1>
-                <h1>
-                  {{ i.rating }} 🌟
-                </h1>
+                <h1>{{ i.rating }} 🌟</h1>
               </div>
             </div>
 
@@ -211,7 +240,9 @@ onMounted(async () => {
           </div>
         </div>
         <h1 class="font-semibold mt-20">Give a review</h1>
-        <p v-if="error" class="text-rose-600 text-sm italic">* Sorry, {{ error }}</p>
+        <p v-if="error" class="text-rose-600 text-sm italic">
+          * Sorry, {{ error }}
+        </p>
         <div class="my-4">
           <div class="mb-6">
             <label
