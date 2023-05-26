@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path, include
 from api.students.views import RegisterStudent, TestAPIView
 from api.instructor.views import RegisterInstructor
-from api.common.views import Login, OtpValidation
+from api.common.views import Login, Logout, OtpValidation
 from rest_framework import routers
 from api.course.views import (ChapterViewSet, CourseDetails, CoursePublicViewSet, CourseViewSet,
     EnrollmentViewSet, LessonViewSet, ReviewAndRetingViewSet)
@@ -52,5 +52,8 @@ urlpatterns = [
     # token validation
     path('token-validation/', OtpValidation.as_view(), name='token-validation'),
     # login
-    path('login/', Login.as_view(), name='login')
+    path('login/', Login.as_view(), name='login'),
+    #logout
+    path('logout/', Logout.as_view(), name='logout'),
+
 ]

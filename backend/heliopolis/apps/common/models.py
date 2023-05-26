@@ -25,6 +25,8 @@ class CustomUser(AbstractUser):
     def save(self, *args, **kwargs):
         if not self.username:
             self.username = self.email
+        if self.is_staff:
+            self.is_active = True
         super().save(*args, **kwargs)
 
     def get_user_group(self, *args, **kwargs):

@@ -13,6 +13,7 @@ from rest_framework.authtoken.models import Token
 from apps.student.models import Student
 from apps.instructor.models import Instructor
 from apps.common.models import CustomUser
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -70,23 +71,16 @@ class Login(APIView):
             }
             return Response(data)
         return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)
+    
+class Logout(APIView):
+    permission_classes = (IsAuthenticated,)
 
 
-        # try:
-        # otp_object = Otp.objects.get(email = email)
-        # if otp_object.otp == otp:
-        #     try:
-        #         user = Student.objects.get(email = email)
-        #     except:
-        #         user = Instructor.objects.get(email = email)
-        #     token = Token.objects.get_or_create(user = user)[0]
-        #     if token:
-        #         user.is_active = True
-        #         user.save()
-        #     data = {
-        #         "email":email,
-        #         "token":str(token)
-        #     }
-        #     print(token)
-        #     return Response({"status":"successfully validate",'message': data})
-        # return Response({'message': "Otp not match"})
+    def post(self, request):
+        try:
+            token_obj = Token.objects.get(user = request.user)
+            token_obj.delete()
+            return Response({'message': 'Succefully logout'}, status=status.HTTP_200_OK,)
+
+        except:
+            return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)

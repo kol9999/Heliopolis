@@ -794,6 +794,22 @@
         "documentation": {}
     },
     {
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
         "label": "Chapter",
         "importPath": "apps.course.models",
         "description": "apps.course.models",
@@ -954,14 +970,6 @@
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
-        "isExtraImport": true,
-        "detail": "rest_framework.permissions",
-        "documentation": {}
-    },
-    {
         "label": "PermissionDenied",
         "importPath": "rest_framework.exceptions",
         "description": "rest_framework.exceptions",
@@ -1043,6 +1051,14 @@
     },
     {
         "label": "Login",
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "isExtraImport": true,
+        "detail": "api.common.views",
+        "documentation": {}
+    },
+    {
+        "label": "Logout",
         "importPath": "api.common.views",
         "description": "api.common.views",
         "isExtraImport": true,
@@ -1495,6 +1511,15 @@
         "importPath": "api.common.views",
         "description": "api.common.views",
         "peekOfCode": "class Login(APIView):\n    def post(self, request):\n        data = request.data\n        try:\n            email = request.data['email']\n        except:\n            return Response({'message': 'email needed'}, status=status.HTTP_400_BAD_REQUEST,)\n        try:\n            password = request.data['password']\n        except:",
+        "detail": "api.common.views",
+        "documentation": {}
+    },
+    {
+        "label": "Logout",
+        "kind": 6,
+        "importPath": "api.common.views",
+        "description": "api.common.views",
+        "peekOfCode": "class Logout(APIView):\n    permission_classes = (IsAuthenticated,)\n    def post(self, request):\n        try:\n            token_obj = Token.objects.get(user = request.user)\n            token_obj.delete()\n            return Response({'message': 'Succefully logout'}, status=status.HTTP_200_OK,)\n        except:\n            return Response({'message': 'wrong credential'}, status=status.HTTP_400_BAD_REQUEST,)",
         "detail": "api.common.views",
         "documentation": {}
     },
